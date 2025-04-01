@@ -1,0 +1,26 @@
+name: Validate Kubernetes Manifests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up kubeconform
+        uses: yokawasa/action-setup-kube-tools@v0.9.2
+        with:
+          setup-tools: kubeconform
+
+      - name: Find and validate manifests
+        run: |
+          find k8s -type f -name "*.yaml" -o -name "*.yml" | while IFS= read -r file; do
+            echo "Validating: $file"
+            kubeconform "$file"
+          done
