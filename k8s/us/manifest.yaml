@@ -64,6 +64,7 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           privileged: false
+          readOnlyRootFilesystem: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -120,6 +121,7 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           privileged: false
+          readOnlyRootFilesystem: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -176,6 +178,7 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           privileged: false
+          readOnlyRootFilesystem: true
 ---
 apiVersion: v1
 kind: Service
